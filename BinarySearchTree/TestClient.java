@@ -18,9 +18,15 @@ public class TestClient {
         bst.insert(18);
         bst.insert(23);
         
-        bst.inorderTraversal();
-        bst.preorderTraversal();
-        bst.postorderTraversal();
+        TreeTraversal tr = new TreeTraversal();
+        tr.inorderTraversal(bst.root);
+        tr.inorderWithTreadedTree(bst.root);
+        System.out.println("#############################");
+        tr.preorderTraversal(bst.root);
+        tr.preorderWithThreadedTree(bst.root);
+        System.out.println("#############################");       
+        tr.postorderTraversal(bst.root);
+        tr.postorderWithTreadedTree(bst.root);
         
         //bst.printTree();
         
