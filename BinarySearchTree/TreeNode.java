@@ -1,7 +1,6 @@
 package BinarySearchTree;
 
 public class TreeNode {
-
     int key;
     TreeNode left, right, parent;
     

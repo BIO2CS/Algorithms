@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BST {
     TreeNode root;
@@ -11,7 +12,7 @@ public class BST {
     public BST() {        
     }
     
-    public void Insert(int key) {
+    public void insert(int key) {
         TreeNode node = new TreeNode(key);
         TreeNode pre = null, runner = root;
         while (runner != null) {
@@ -169,5 +170,73 @@ public class BST {
                 children = 0;
             }
         }
+    }
+    
+    private void printUtil(List<Integer> list, String traversalType) {
+        System.out.println("Binary Search Tree Iterative " + traversalType + " Traversal");
+        for (int d : list) {
+            System.out.print(d + " ");
+        }
+        System.out.println();
+    }
+    
+    public void inorderTraversal() {
+        List<Integer> list = new ArrayList<Integer>();
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode runner = root;
+        while (runner != null || !stack.isEmpty()) {
+            if (runner != null) {
+                stack.push(runner);
+                runner = runner.left;
+            }
+            else {
+                TreeNode top = stack.pop();
+                list.add(top.key);
+                runner = top.right;
+            }
+        }
+        printUtil(list, "Inorder");
+    }
+    
+    public void preorderTraversal() {
+        List<Integer> list = new ArrayList<Integer>();
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode runner = root;
+        while (runner != null || !stack.isEmpty()) {
+            if (runner != null) {
+                list.add(runner.key);
+                if (runner.right != null) {
+                    stack.add(runner.right);
+                }
+                runner = runner.left;
+            }
+            else {
+                runner = stack.pop();
+            }            
+        }
+        printUtil(list, "Preorder");
+    }
+    
+    public void postorderTraversal() {
+        List<Integer> list = new ArrayList<Integer>();
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode runner = root, pre = null;
+        while (runner != null || !stack.isEmpty()) {
+            if (runner != null) {
+                stack.push(runner);
+                runner = runner.left;
+            }
+            else {
+                TreeNode top = stack.peek();
+                if (top.right == null || top.right == pre) {
+                    list.add(top.key);
+                    pre = stack.pop();
+                }
+                else {
+                    runner = top.right;
+                }
+            }
+        }
+        printUtil(list, "Postorder");
     }
 }
