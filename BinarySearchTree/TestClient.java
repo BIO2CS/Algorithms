@@ -18,7 +18,7 @@ public class TestClient {
         bst.insert(18);
         bst.insert(23);
         
-        TreeTraversal tr = new TreeTraversal();
+       /* TreeTraversal tr = new TreeTraversal();
         tr.inorderTraversal(bst.root);
         tr.inorderWithTreadedTree(bst.root);
         System.out.println("#############################");
@@ -32,6 +32,16 @@ public class TestClient {
         
         TreeNode key = bst.search(15);
         TreeNode next = bst.getPredecessor(key);
-        System.out.println(next.key);
+        System.out.println(next.key);*/
+        
+        //using example on Page 303 in CLRS
+        AugmentedBST tr = new AugmentedBST();
+        int[] nodes = {26, 17, 14, 20, 10, 16, 19, 21, 7, 12, 3, 41, 30, 47, 28, 38, 35, 39};
+        for (int d : nodes) {
+            tr.insert(d);
+        }
+        int k = 15;
+        AugmentedNode kthNode = tr.selectKthSmallestNode(tr.root, k);
+        System.out.println(k + " th smallest node is " + kthNode.val);
     }
 }
