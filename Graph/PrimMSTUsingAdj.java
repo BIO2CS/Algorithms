@@ -2,6 +2,12 @@ package Graph;
 
 import java.util.*;
 
+/**
+ * Generic PriorityQueue is not going to work because you will change the elements while traversing the queue.
+ * http://stackoverflow.com/questions/1871253/updating-java-priorityqueue-when-its-elements-change-priority
+ * @author Huiqiong Gu
+ *
+ */
 public class PrimMSTUsingAdj {
 
     private boolean[] visited;
@@ -27,13 +33,7 @@ public class PrimMSTUsingAdj {
     public void mstUsingAdj(WeightedEdgeGraph g) {
         while (!heap.isEmpty()) {
             PrimNode front = heap.extractMin();
-            visited[front.v] = true;
-            System.out.println("Pulling from queue vertex is " + front.v + " weight is " + front.weight);
-            /*Iterable<WeightedEdge> list = g.adj(front.v);
-            for (WeightedEdge edge : list) {
-                int one = edge.either(), other = edge.other(one);
-                System.out.println("\t\t" + one + "->" + other + ": " + edge.weight());
-            }*/
+            visited[front.v] = true;        
             for (WeightedEdge e : g.adj(front.v)) {
                 int w = e.other(front.v);
                 if (visited[w]) continue;
@@ -43,9 +43,6 @@ public class PrimMSTUsingAdj {
                     heap.decreaseWeight(w, e.weight());
                 }
             }
-          /*  for (PrimNode n : queue) {
-                System.out.println("\t" + n.v + ": " + n.weight + "\t\t");
-            }*/
         }
     }
     
